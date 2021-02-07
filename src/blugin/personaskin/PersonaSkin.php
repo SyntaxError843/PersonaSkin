@@ -33,12 +33,12 @@ use pocketmine\plugin\PluginBase;
 class PersonaSkin extends PluginBase{
     private $originalAdaptor = null;
 
-    public function onEnable(){
+    public function onEnable() : void{
         $this->originalAdaptor = SkinAdapterSingleton::get();
         SkinAdapterSingleton::set(new ParsonaSkinAdapter);
     }
 
-    public function onDisable(){
+    public function onDisable() : void{
         if($this->originalAdaptor !== null){
             SkinAdapterSingleton::set($this->originalAdaptor);
         }
