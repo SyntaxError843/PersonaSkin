@@ -31,12 +31,25 @@ use pocketmine\network\mcpe\convert\SkinAdapter;
 use pocketmine\network\mcpe\convert\SkinAdapterSingleton;
 use pocketmine\plugin\PluginBase;
 
+use function is_dir;
+use function rmdir;
+use function scandir;
+
 final class PersonaSkin extends PluginBase{
     private ?SkinAdapter $originalAdaptor = null;
 
     protected function onEnable() : void{
         $this->originalAdaptor = SkinAdapterSingleton::get();
         SkinAdapterSingleton::set(new PersonaSkinAdapter);
+
+        /**
+         * This is a plugin that does not use data folders.
+         * Delete the unnecessary data folder of this plugin for users.
+         */
+        $dataFolder = $this->getDataFolder();
+        if(is_dir($dataFolder) && empty(scandir($dataFolder))){
+            rmdir($dataFolder);
+        }
     }
 
     protected function onDisable() : void{
