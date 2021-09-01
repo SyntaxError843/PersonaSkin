@@ -36,7 +36,7 @@ final class PersonaSkin extends PluginBase{
 
     protected function onEnable() : void{
         $this->originalAdaptor = SkinAdapterSingleton::get();
-        SkinAdapterSingleton::set(new ParsonaSkinAdapter);
+        SkinAdapterSingleton::set(new PersonaSkinAdapter);
     }
 
     protected function onDisable() : void{

@@ -34,7 +34,7 @@ use pocketmine\network\mcpe\protocol\types\skin\SkinData;
 use function random_bytes;
 use function str_repeat;
 
-class ParsonaSkinAdapter extends LegacySkinAdapter{
+class PersonaSkinAdapter extends LegacySkinAdapter{
     /** @var SkinData[] */
     private array $personaSkins = [];
 
