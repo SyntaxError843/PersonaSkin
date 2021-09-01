@@ -27,18 +27,19 @@ declare(strict_types=1);
 
 namespace blugin\personaskin;
 
+use pocketmine\network\mcpe\convert\SkinAdapter;
 use pocketmine\network\mcpe\convert\SkinAdapterSingleton;
 use pocketmine\plugin\PluginBase;
 
-class PersonaSkin extends PluginBase{
-    private $originalAdaptor = null;
+final class PersonaSkin extends PluginBase{
+    private ?SkinAdapter $originalAdaptor = null;
 
-    public function onEnable() : void{
+    protected function onEnable() : void{
         $this->originalAdaptor = SkinAdapterSingleton::get();
         SkinAdapterSingleton::set(new ParsonaSkinAdapter);
     }
 
-    public function onDisable() : void{
+    protected function onDisable() : void{
         if($this->originalAdaptor !== null){
             SkinAdapterSingleton::set($this->originalAdaptor);
         }

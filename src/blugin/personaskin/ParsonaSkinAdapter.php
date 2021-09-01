@@ -31,10 +31,14 @@ use pocketmine\entity\Skin;
 use pocketmine\network\mcpe\convert\LegacySkinAdapter;
 use pocketmine\network\mcpe\protocol\types\skin\SkinData;
 
+use function random_bytes;
+use function str_repeat;
+
 class ParsonaSkinAdapter extends LegacySkinAdapter{
     /** @var SkinData[] */
-    private $personaSkins = [];
+    private array $personaSkins = [];
 
+    /** @override */
     public function fromSkinData(SkinData $data) : Skin{
         if($data->isPersona()){
             $id = $data->getSkinId();
@@ -44,6 +48,7 @@ class ParsonaSkinAdapter extends LegacySkinAdapter{
         return parent::fromSkinData($data);
     }
 
+    /** @override */
     public function toSkinData(Skin $skin) : SkinData{
         return $this->personaSkins[$skin->getSkinId()] ?? parent::toSkinData($skin);
     }
