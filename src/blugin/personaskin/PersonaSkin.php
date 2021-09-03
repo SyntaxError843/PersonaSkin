@@ -31,6 +31,7 @@ use pocketmine\network\mcpe\convert\SkinAdapter;
 use pocketmine\network\mcpe\convert\SkinAdapterSingleton;
 use pocketmine\plugin\PluginBase;
 
+use function count;
 use function is_dir;
 use function rmdir;
 use function scandir;
@@ -47,7 +48,7 @@ final class PersonaSkin extends PluginBase{
          * Delete the unnecessary data folder of this plugin for users.
          */
         $dataFolder = $this->getDataFolder();
-        if(is_dir($dataFolder) && empty(scandir($dataFolder))){
+        if(is_dir($dataFolder) && count(scandir($dataFolder)) <= 2){
             rmdir($dataFolder);
         }
     }
